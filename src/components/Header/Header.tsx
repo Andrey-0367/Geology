@@ -53,7 +53,7 @@ export default function Header() {
           onClick={() => setIsMenuOpen(false)}
         >
           <Image
-            src="/icons/logo.svg"
+            src="/Geology/icons/logo.svg"
             alt="Geology Logo"
             width={68}
             height={71}

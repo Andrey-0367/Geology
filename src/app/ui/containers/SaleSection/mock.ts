@@ -20,5 +20,6 @@ export const mockProducts = [
     oldPrice: 23990,
     newPrice: 19990
   },
+  
   // Добавьте больше товаров
 ];
