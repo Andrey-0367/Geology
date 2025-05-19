@@ -26,11 +26,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Create .nojekyll file
-        run: |
-          touch out/.nojekyll
-          echo "Disabling Jekyll processing"          
-
       - name: Verify out directory
         run: ls -la out/  
 
