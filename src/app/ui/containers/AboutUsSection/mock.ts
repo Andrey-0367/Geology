@@ -5,7 +5,7 @@ export const aboutUsData: AboutUsProps = {
   title: "О нас",
   items: [
     {
-      src: "/images/XXXL.png",
+      src: "/Geology/images/XXXL.png",
       alt: "Получение воды",
       paragraphs: [
         {
@@ -22,7 +22,7 @@ export const aboutUsData: AboutUsProps = {
       ]
     },
     {
-      src: "/images/kesson.png",
+      src: "/Geology/images/kesson.png",
       alt: "Дети подкидывают вверх разноцветное полотно",
       paragraphs: [
         {
