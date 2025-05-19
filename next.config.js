@@ -1,16 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/Geology',
-  
-  output: 'export',
-  
-  distDir: 'out',
-  
+  output: "export",
+  basePath: "/Geology",
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  
-  trailingSlash: true,
-}
+
+  distDir: "out",
+};
 
 module.exports = nextConfig;
