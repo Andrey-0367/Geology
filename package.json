@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build && next export",
+    "build": "next build",
     "dev": "next dev",
     "clean": "rm -rf .next node_modules/.cache"
   },
@@ -18,6 +18,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-responsive": "^10.0.1",
+    "three": "0.146.0",
+    "webpack": "^5.89.0",
     "swiper": "^11.2.5"
   },
   "devDependencies": {
