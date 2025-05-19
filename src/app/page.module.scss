@@ -1,0 +1,42 @@
+.page {
+  --gray-rgb: 255, 255, 255;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+
+  font-family: var(--font-geist-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 20px;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  grid-row-start: 2;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .main {
+    gap: 28px;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 0;
+  }
+}

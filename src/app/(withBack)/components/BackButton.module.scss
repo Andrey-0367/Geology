@@ -1,0 +1,24 @@
+.backButton {
+  position: absolute;
+
+
+  top: clamp(0.5rem, 0.357rem + 0.3vw, 0.625rem);
+  left: clamp(1.25rem, -0.417rem + 7.407vw, 6.25rem);
+
+
+  background: none;
+  border: none;
+  z-index: 10;
+  cursor: pointer;
+  & img {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .backButton {
+    position: static;
+    padding-left: clamp(1.25rem, -0.417rem + 7.407vw, 6.25rem);
+
+  }
+}

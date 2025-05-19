@@ -1,0 +1,183 @@
+.header {
+  padding: 1rem 0;
+  position: relative;
+  z-index: 1000;
+  background: transparent; // Добавьте нужный цвет фона
+
+  .navContainer {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 84px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      padding: 0 20px;
+      height: 60px;
+    }
+  }
+
+  // Стили для логотипа
+  .logoLink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: opacity 0.3s;
+    z-index: 1001;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    img {
+      display: block;
+    }
+  }
+
+  .logoText {
+    font-family: var(--font-miltonian), serif;
+    font-size: 2.25rem;
+     color: #3f2e02;
+    
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  // Стили для бургер-кнопки
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    position: relative;
+
+    span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #3f2e02;
+      margin: 5px 0;
+      transition: 0.3s;
+      transform-origin: center;
+    }
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
+    // Анимация бургера при открытии
+    &.active {
+      span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+
+  // Основное меню
+  .mainMenu {
+    display: flex;
+    gap: 2rem;
+    margin-right: 10px;
+    padding-top: 10px;
+    transition: 0.3s;
+
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 70%;
+      max-width: 300px;
+      background: #04aeec;
+      flex-direction: column;
+      padding: 80px 25px 30px;
+      margin: 0;
+      gap: 1.5rem;
+      z-index: 1000;
+      box-shadow: -2px 0 15px rgba(0, 0, 0, 0.2);
+
+      &.open {
+        right: 0;
+      }
+    }
+  }
+
+  // Стили для ссылок меню
+  .menuLink {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    color: #3f2e02;
+    letter-spacing: -0.011em;
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+
+    &:hover {
+      color:#bc8d15, 10%;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(237, 196, 85, 0.2);
+      width: 100%;
+      text-align: center;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  // Оверлей для мобильного меню
+  .menuOverlay {
+    display: none;
+    
+    @media (max-width: 768px) {
+      &.open {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+    }
+  }
+}
+
+// Анимации
+@keyframes slideIn {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    right: 0;
+  }
+  to {
+    right: -100%;
+  }
+}

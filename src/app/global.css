@@ -1,0 +1,41 @@
+:root {
+  --background: transparent;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dnd-body {
+ background: linear-gradient(
+  to bottom left,
+  #0db3ea 30%,   /* темный цвет занимает 30% пространства */
+  #A3C7D6 70%    /* плавный переход начинается с 70% */
+);
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--font-maitree), sans-serif;
+  color: #2b2003;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  translate: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

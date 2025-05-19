@@ -1,0 +1,67 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem; // Добавляем горизонтальный padding
+  box-sizing: border-box; // Важно для правильного расчета ширины
+}
+
+.priceContainer {
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.oldPrice {
+  font-size: 1.25rem;
+  color: #94a3b8;
+  text-decoration: line-through;
+  margin-right: 1rem;
+}
+
+.newPrice {
+  font-size: 1.75rem;
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+.description {
+  padding: 1.5rem;
+  background: transparent;
+  border-radius: 8px;
+  line-height: 1.6;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1e293b;
+  }
+
+  p {
+    color: #01060c;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem; // Фиксируем padding для мобилок
+    width: 100%; // Занимаем всю ширину
+    overflow-x: hidden; // Защита от выхода за пределы экрана
+  }
+
+  .priceContainer {
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+
+  // Добавляем для всех текстовых элементов
+  .description,
+  .oldPrice,
+  .newPrice {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
