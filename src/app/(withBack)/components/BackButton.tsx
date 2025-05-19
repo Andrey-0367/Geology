@@ -15,7 +15,7 @@ interface BackButtonProps {
 
 export default function BackButton({
   className = '',
-  iconSrc = '/icons/arrow_back.svg',
+  iconSrc = '/Geology/icons/arrow_back.svg',
   iconAlt = 'Назад',
   iconWidth = 28,
   iconHeight = 28,
