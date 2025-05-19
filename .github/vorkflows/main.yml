@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [dev]  # Триггер только на ветку dev
+    branches: [dev]  
 
 permissions:
   contents: write
