@@ -1,10 +1,6 @@
-const fs = require('fs');
-const path = require('path');
+const { writeFileSync, existsSync, mkdirSync } = require('fs');
+const { join } = require('path');
 
-const outDir = path.join(__dirname, 'out');
-
-// Гарантированное создание .nojekyll
-if (!fs.existsSync(outDir)) {
-  fs.mkdirSync(outDir, { recursive: true });
-}
-fs.writeFileSync(path.join(outDir, '.nojekyll'), '');
+const outDir = join(__dirname, 'out');
+if (!existsSync(outDir)) mkdirSync(outDir);
+writeFileSync(join(outDir, '.nojekyll'), '');

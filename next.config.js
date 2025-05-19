@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
-const fs = require('fs');
-const path = require('path');
+const { writeFileSync, existsSync, mkdirSync } = require('fs');
+const { join } = require('path');
 
 module.exports = {
   output: 'export',
@@ -10,15 +10,12 @@ module.exports = {
     unoptimized: true,
   },
   webpack: (config) => {
-    // Создаем папку out, если её нет
-    const outDir = path.join(__dirname, 'out');
-    if (!fs.existsSync(outDir)) {
-      fs.mkdirSync(outDir, { recursive: true });
-    }
+
+    const outDir = join(__dirname, 'out');
+    if (!existsSync(outDir)) mkdirSync(outDir);
+    writeFileSync(join(outDir, '.nojekyll'), '');
     
-    // Создаем .nojekyll файл
-    fs.writeFileSync(path.join(outDir, '.nojekyll'), '');
-    
+   
     config.resolve.alias = {
       ...config.resolve.alias,
       'three/examples/jsm/controls/OrbitControls': 'three/examples/jsm/controls/OrbitControls.js',

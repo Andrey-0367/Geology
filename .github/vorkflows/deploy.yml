@@ -24,18 +24,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
           
-      - name: Build project
+      - name: Build and prepare
         run: |
           rm -rf out/
           npm run build
-          ls -la out/ # Проверка наличия файлов
           
-      - name: Force .nojekyll creation
-        run: |
+          # Гарантированное создание .nojekyll
           touch out/.nojekyll
-          [ -f out/.nojekyll ] || exit 1
+          echo "Deployed version: $(date +%Y-%m-%d_%H-%M-%S)" > out/version.txt
           
-      - name: Deploy
+          # Проверка содержимого
+          [ -f out/.nojekyll ] || exit 1
+          [ -f out/index.html ] || exit 1
+          
+      - name: Force create gh-pages
         uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -43,3 +45,6 @@ jobs:
           publish_dir: ./out
           force_orphan: true
           enable_jekyll: false
+          allow_empty_commit: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
