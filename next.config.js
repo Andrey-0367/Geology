@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: '/Geology',
   output: 'export',
+  basePath: '/Geology',
   trailingSlash: true,
   images: {
     unoptimized: true,
