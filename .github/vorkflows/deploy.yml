@@ -28,12 +28,12 @@ jobs:
         run: |
           npm run build
           touch out/.nojekyll  # Создаем .nojekyll в корне out
-          echo "Built at: $(date)" > out/build-info.txt  # Для проверки
+          echo "Built at: $(date)" > out/build-info.txt  
 
       - name: Verify out directory
         run: |
           ls -la out/
-          [ -f out/index.html ] || exit 1  # Проверка наличия index.html
+          [ -f out/index.html ] || exit 1  
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
