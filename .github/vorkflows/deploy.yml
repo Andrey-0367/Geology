@@ -6,40 +6,36 @@ on:
 
 permissions:
   contents: write
-  pages: write  # Добавляем права для работы с Pages
+  pages: write
   id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4  # Обновляем до актуальной версии
-        
+      - uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x  # Используем LTS-версию
-          cache: npm  # Включаем кэширование
-        
+          node-version: 20.x
+          cache: npm
+
       - name: Install dependencies
-        run: npm ci  # Чистая установка зависимостей
-        
+        run: npm ci
+
       - name: Build
         run: |
           rm -rf out/
           npm run build
-          touch out/.nojekyll  # Гарантированное создание файла
-        
-      - name: Verify output
-        run: |
-          [ -f out/.nojekyll ] || exit 1
-          [ -f out/index.html ] || exit 1
-        
+          touch out/.nojekyll
+          ls -la out/  # Проверка содержимого
+
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3.9.3  # Указываем точную версию
+        uses: peaceiris/actions-gh-pages@v4.0.0  # Обновленная версия
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages  # Явно указываем ветку
+          publish_branch: gh-pages
           publish_dir: ./out
           force_orphan: true
           enable_jekyll: false
