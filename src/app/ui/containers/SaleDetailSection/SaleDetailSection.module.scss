@@ -1,0 +1,42 @@
+.container {
+  max-width: 1236px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  overflow: visible;
+  padding: 0 15px;
+}
+.swiperContainer {
+  width: 100%;
+  padding: 39px 0;
+
+  .swiperSlide {
+    background-position: center;
+    background-size: cover;
+    max-width: 500px;
+    height: 400px;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .swiperContainer {
+    padding: 18px 0;
+    .swiperSlide {
+      width: 232px;
+      height: 200px;
+    }
+  }
+}

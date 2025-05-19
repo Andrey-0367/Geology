@@ -1,0 +1,21 @@
+.socialLinksIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 93%;
+  padding-left: 27px;
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 40px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  @media (width <= 560px) {
+    width: 162px;
+    flex-wrap: wrap;
+    padding-bottom: 23px;
+  }
+}

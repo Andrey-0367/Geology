@@ -1,0 +1,32 @@
+.Title {
+  display: flex;
+  justify-content: center;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #3f2e02;
+
+  &.h1 {
+    font-size: clamp(24px, 4.5vw, 44px);
+    line-height: clamp(33px, 5.5vw, 52px);
+    text-align: center;
+  }
+
+  &.h2 {
+    font-size: clamp(1rem, 1.852vw + 0.583rem, 2.25rem);
+    line-height: clamp(23px, 4.5vw, 49px);
+    text-align: center;
+  }
+
+  &.h3 {
+    font-size: clamp(1.25rem, 0.37vw + 1.167rem, 1.5rem);
+    line-height: clamp(1.625rem, 0.648vw + 1.479rem, 2.063rem);
+    justify-content: flex-start;
+    text-align: left;
+    @media (max-width: 768px) {
+      font-weight: 600;    
+    }
+  }
+}

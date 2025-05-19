@@ -1,0 +1,13 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  grid-row-start: 2;
+}
+
+@media (max-width: 600px) {
+  .section {
+    gap: 28px;
+    align-items: center;
+  }
+}

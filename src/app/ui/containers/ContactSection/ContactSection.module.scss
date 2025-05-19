@@ -1,0 +1,167 @@
+@mixin contactSection-border {
+  border-radius: 20px;
+  border-style: solid;
+  border-color: #ffc541;
+  box-sizing: border-box;
+}
+
+@mixin contactSection-typography {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+}
+
+.contactSection {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+
+  .sectionTitle {
+    @media (max-width: 768px) {
+      padding-top: 10px;
+      padding-bottom: 20px;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+
+  &__container {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+    width: 100%;
+  }
+
+  &__promo {
+    @include contactSection-border;
+    border-width: 4px 0;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    @media (max-width: 768px) {
+      gap: 11px;
+    }
+  }
+
+  &__title {
+    padding: 20px 20px 12px;
+    justify-content: left;
+
+    @media (max-width: 768px) {
+      font-weight: 600;
+      font-size: 18px !important;
+      padding: 12px 20px 0;
+    }
+  }
+
+  &__description {
+    @include contactSection-typography;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin: 0;
+
+    &:first-child {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__map {
+    @include contactSection-border;
+    border-width: 4px 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+
+    @media (max-width: 699px) {
+      .ymaps-2-1-79-ground-pane {
+        border-radius: 20px !important;
+      }
+    }
+  }
+}
+
+.adress {
+  padding-top: 7px;
+  padding-left: 16px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 39px;
+  letter-spacing: -0.02em;
+  font-style: normal;
+
+  @media (max-width: 768px) {
+    line-height: 35px;
+    padding-left: 20px;
+  }
+
+  span {
+    @include contactSection-typography;
+  }
+
+  a {
+    @include contactSection-typography;
+    text-decoration: none;
+    color: #232120;
+  }
+
+  a ~ a {
+    text-decoration: underline;
+  }
+}
+
+@media (width >= 700px) {
+  .contactSection {
+    width: 100%;
+    box-sizing: border-box;
+
+    .sectionTitle {
+      padding-bottom: 60px;
+    }
+
+    &__container {
+      @include contactSection-border;
+      border-width: 0 4px;
+      display: grid;
+      grid-template-columns: 400px auto;
+      gap: 0;
+      padding: 0;
+      width: 100%;
+      margin: 0 auto;
+      align-items: stretch;
+      position: relative;
+      height: 556px;
+    }
+
+    &__promo {
+      border: none;
+      margin-right: -4px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__map {
+      flex-grow: 1;
+      height: 100%;
+      min-height: 556px;
+      border: none;
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: -4px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: #ffc541;
+        border-radius: 0 20px 20px 0;
+        z-index: 2;
+      }
+    }
+  }
+}
