@@ -38,6 +38,7 @@
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",
     "@types/three": "0.176.0",
+    "sass": "^1.89.0",
     "typescript": "5.8.3"
   }
 }
