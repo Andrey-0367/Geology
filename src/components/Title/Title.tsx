@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./title.module.scss";
+import styles from "./Title.module.scss";
 
 export interface TitleProps {
   tag: "h1" | "h2" | "h3";
