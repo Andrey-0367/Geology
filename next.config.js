@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  basePath: "/Geology",
+  output: 'export',
+  basePath: '/Geology',
   trailingSlash: true,
   images: {
     unoptimized: true,
   },
+}
 
-  distDir: "out",
-};
-
-module.exports = nextConfig;
+module.exports = nextConfig
