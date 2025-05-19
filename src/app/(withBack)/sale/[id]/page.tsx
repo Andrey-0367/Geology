@@ -4,6 +4,7 @@ import { mockSales } from './mock';
 import { SaleDetailSection } from '@/app/ui/containers/SaleDetailSection/SaleDetailSection';
 import { Title } from '@/components/Title/Title';
 
+
 export interface SaleDetails {
   id: number;
   title: string;
