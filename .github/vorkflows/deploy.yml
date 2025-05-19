@@ -2,38 +2,44 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ dev ]
+    branches: [dev]
 
 permissions:
-  contents: write  
+  contents: write
+  pages: write  # Добавляем права для работы с Pages
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  
-
+      - uses: actions/checkout@v4  # Обновляем до актуальной версии
+        
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
-
+          node-version: 20.x  # Используем LTS-версию
+          cache: npm  # Включаем кэширование
+        
       - name: Install dependencies
-        run: npm install
-
+        run: npm ci  # Чистая установка зависимостей
+        
       - name: Build
-        run: npm run build
-
-      - name: Verify out directory
-        run: ls -la out/  
-
+        run: |
+          rm -rf out/
+          npm run build
+          touch out/.nojekyll  # Гарантированное создание файла
+        
+      - name: Verify output
+        run: |
+          [ -f out/.nojekyll ] || exit 1
+          [ -f out/index.html ] || exit 1
+        
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.9.3  # Указываем точную версию
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages  # Явно указываем ветку
           publish_dir: ./out
-          force_orphan: true  
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+          force_orphan: true
+          enable_jekyll: false

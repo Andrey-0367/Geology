@@ -1,16 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: '/Geology',
-  
   output: 'export',
-  
-  distDir: 'out',
-  
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  
-  trailingSlash: true,
   
   webpack: (config) => {
     config.resolve.alias = {
