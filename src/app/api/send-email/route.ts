@@ -37,9 +37,16 @@ export async function POST(request: Request) {
 
   } catch (error) {
     console.error("Полная ошибка:", error);
+    let errorMessage = 'Произошла неизвестная ошибка'
+    if (error instanceof Error) {
+      errorMessage = error.message
+    } else if (typeof error === 'string') {
+      errorMessage = error
+    }
+
     return NextResponse.json(
-      { error: "Ошибка отправки: " + error.message }, // Передаем детали
+      { error: `Ошибка отправки: ${errorMessage}` },
       { status: 500 }
-    );
+    )
   }
 }
