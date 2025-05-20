@@ -2,31 +2,44 @@ import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
 export async function POST(request: Request) {
-  const { email, message } = await request.json()
+  const { email, message } = await request.json();
+
+  // Валидация
+  if (!email || !message) {
+    return NextResponse.json(
+      { error: "Все поля обязательны" },
+      { status: 400 }
+    );
+  }
 
   try {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
       },
-    })
+    });
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    const info = await transporter.sendMail({
+      from: `"Сайт Geology" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO,
       subject: `Новое сообщение от ${email}`,
       text: message,
-      html: `<p>${message}</p><p>От: ${email}</p>`,
-    })
+      html: `<div>
+        <p>${message}</p>
+        <p>От: ${email}</p>
+      </div>`,
+    });
 
-    return NextResponse.json({ success: true })
+    console.log("Письмо отправлено:", info.messageId);
+    return NextResponse.json({ success: true });
+
   } catch (error) {
-    console.error(error)
+    console.error("Полная ошибка:", error);
     return NextResponse.json(
-      { error: 'Ошибка при отправке письма' },
+      { error: "Ошибка отправки: " + error.message }, // Передаем детали
       { status: 500 }
-    )
+    );
   }
 }

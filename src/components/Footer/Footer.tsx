@@ -23,13 +23,15 @@ export default function Footer() {
     try {
       const response = await fetch("/api/send-email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error("Ошибка при отправке сообщения");
+      const data = await response.json(); // Добавляем парсинг ответа
+
+      if (!response.ok) {
+        throw new Error(data.error || "Ошибка сервера");
+      }
 
       setSuccess(true);
       setTimeout(() => {
@@ -38,7 +40,9 @@ export default function Footer() {
         setSuccess(false);
       }, 2000);
     } catch (err) {
-      setError((err as Error).message || "Произошла ошибка");
+      const error = err as Error;
+      setError(error.message);
+      console.error("Детали ошибки:", error);
     } finally {
       setLoading(false);
     }
