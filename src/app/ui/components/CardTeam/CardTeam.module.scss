@@ -1,0 +1,189 @@
+$slim-card-width: 294px;
+$slim-card-height: 529px;
+$wide-card-width: 397px;
+$wide-card-height: 492px;
+$slim-card-general-container-gap: 12px;
+$wide-card-general-container-gap: 8px;
+$slim-card-image-container-width: 270px;
+$slim-card-image-container-height: 334px;
+$wide-card-image-container-width: 262px;
+$wide-card-image-container-height: 349px;
+$slim-card-employee-full-name-margin-top: 20px;
+$wide-card-employee-full-name-margin-top: 12px;
+
+.container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  font-family: Manrope, Arial, Helvetica, sans-serif;
+  text-align: center;
+  background: #f6f6f6;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border-radius: 20px;
+  background: linear-gradient(285.15deg, #ffc541 4.74%, #93aaf3 90.53%);
+  transition: opacity 0.5s ease-in-out;
+  z-index: -1;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border-radius: 20px;
+  background: rgba(192, 194, 214, 1);
+  transition: opacity 0.5s ease-in-out;
+  z-index: -1;
+}
+
+.container:hover::before {
+  opacity: 1;
+}
+
+.container:active::after {
+  opacity: 1;
+}
+
+.slimCard {
+  width: $slim-card-width;
+  height: $slim-card-height;
+  gap: $slim-card-general-container-gap;
+}
+
+.wideCard {
+  width: $wide-card-width;
+  height: $wide-card-height;
+  gap: $wide-card-general-container-gap;
+}
+
+.mainInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1px;
+}
+
+.employeeImageContainer {
+  margin-top: 20px;
+  background-color: transparent;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.employeeImageContainerSlimCard {
+  width: $slim-card-image-container-width;
+  height: $slim-card-image-container-height;
+}
+
+.employeeImageContainerWideCard {
+  width: $wide-card-image-container-width;
+  height: $wide-card-image-container-height;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  transform: translateZ(0);
+}
+
+.employeeImageContainer img {
+   img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    left: 0; // Явное позиционирование
+    top: 0; // Явное позиционирование
+    transform: translateZ(0); // Исправление рендеринга
+  }
+}
+
+.svgPictogram {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+}
+
+.employeeFullName {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32.78px;
+  letter-spacing: -0.01px;
+  text-align: center;
+}
+
+.employeeFullNameSlimCard {
+  margin-top: $slim-card-employee-full-name-margin-top;
+}
+
+.employeeFullNameWideCard {
+  margin-top: $wide-card-employee-full-name-margin-top;
+}
+
+.positionsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: -1.08px;
+  line-height: 24.59px;
+  list-style-type: none;
+}
+
+@media (max-width: 768px) {
+  .container.slimCard {
+    width: 236px;
+    height: 356px;
+
+    .employeeImageContainerSlimCard {
+      width: 200px;
+      height: 214px;
+      margin: 6px auto 0;
+      border-radius: 20px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 0;
+      }
+    }
+
+    .employeeFullName {
+      font-size: 18px !important;
+      margin-top: 12px !important;
+      padding: 0 12px;
+    }
+
+    .positionsList {
+      font-size: 14px !important;
+      padding: 0 12px;
+    }
+  }
+}

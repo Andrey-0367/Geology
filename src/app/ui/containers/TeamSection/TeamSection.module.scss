@@ -1,0 +1,107 @@
+.teamSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+
+  .employeeList {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    list-style: none;
+    padding: 0 20px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    .employee {
+      width: 100%;
+      max-width: 300px;
+      justify-self: center;
+    }
+  }
+
+  .mobileSlider {
+    display: none;
+    width: 100%;
+    margin: 60px 0;
+    padding-left: 20px;
+
+    @media (max-width: 768px) {
+      display: block;
+      margin: 0;
+    }
+
+    .swiperContainer {
+      --swiper-pagination-bottom: 0;
+      --swiper-pagination-bullet-size: 14px;
+      --swiper-pagination-bullet-inactive-color: #c0c2d6;
+      --swiper-pagination-bullet-inactive-opacity: 0.6;
+      --swiper-pagination-color: #ffc541;
+      width: 100%;
+      padding: 30px 0 25px;
+
+      .swiperSlide {
+        width: 294px !important;
+        height: 529px !important;
+
+        .container.slimCard {
+          width: 100%;
+          height: 100%;
+
+          .employeeImageContainerSlimCard {
+            width: 100%;
+            height: 334px;
+            margin: 0;
+
+            img {
+              border-radius: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .teamSection {
+    .mobileSlider {
+      .swiperContainer {
+        .swiperSlide {
+          width: 236px !important;
+          height: 356px !important;
+
+          .container.slimCard {
+            .employeeImageContainerSlimCard {
+              height: 214px;
+              border-radius: 20px 20px 0 0;
+
+              img {
+                border-radius: 20px 20px 0 0;
+              }
+            }
+
+            .employeeFullName {
+              font-size: 18px;
+              margin-top: 12px;
+              padding: 0 12px;
+            }
+
+            .positionsList {
+              padding: 0 12px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
