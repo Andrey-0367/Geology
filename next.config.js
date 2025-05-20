@@ -6,6 +6,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  env: {
+    EMAIL_USER: process.env.EMAIL_USER,
+    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
+    EMAIL_TO: process.env.EMAIL_TO,
+  },
   
   webpack: (config) => {
     config.resolve.alias = {
