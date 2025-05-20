@@ -21,7 +21,7 @@ export const YandexMap = () => {
           }}
           defaultState={{
             center: [56.019247, 37.955254],
-            zoom: 18,
+            zoom: 14,
           }}
           className={styles.map}
         >
