@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className="dnd-body">
         <Header />
-        <main className="container mx-auto p-4">{children}</main>
+        <main className="mainContent">{children}</main>
         <Footer />
       </body>
     </html>

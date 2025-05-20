@@ -30,7 +30,7 @@ export const socialLinksIcons = [
   {
     imgSRC: "/Geology/icon_telegram.png",
     imgALT: "Telegram",
-    link: "#",
+    link: "https://t.me/adrey_vasilich",
   },
   {
     imgSRC: "/Geology/icon_rutube.png",

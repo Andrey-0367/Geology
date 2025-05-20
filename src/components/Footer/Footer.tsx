@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Modal from "@/components/Modal/Modal";
 import styles from "./Footer.module.scss";
 
@@ -13,6 +13,7 @@ export default function Footer() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,20 +29,24 @@ export default function Footer() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error("Ошибка при отправке сообщения");
-      }
+      if (!response.ok) throw new Error("Ошибка при отправке сообщения");
 
       setSuccess(true);
       setTimeout(() => {
-        setSuccess(false);
         setIsModalOpen(false);
         setFormData({ email: "", message: "" });
+        setSuccess(false);
       }, 2000);
     } catch (err) {
       setError((err as Error).message || "Произошла ошибка");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      setIsModalOpen(false);
     }
   };
 
@@ -51,17 +56,18 @@ export default function Footer() {
         <button
           onClick={() => setIsModalOpen(true)}
           className={styles.contactButton}
+          aria-label="Открыть форму обратной связи"
         >
           Написать нам
         </button>
 
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <div className={styles.modalContent}>
-            <h2 className={styles.title}>Отправить сообщение</h2>
+          <div className={styles.modalForm}>
+            <h2 className={styles.modalTitle}>Обратная связь</h2>
             <form onSubmit={handleSubmit} className={styles.form}>
               <input
                 type="email"
-                placeholder="Ваш email"
+                placeholder="Ваш Email"
                 className={styles.input}
                 value={formData.email}
                 onChange={(e) =>
@@ -70,7 +76,7 @@ export default function Footer() {
                 required
               />
               <textarea
-                placeholder="Сообщение"
+                placeholder="Ваше сообщение"
                 className={styles.textarea}
                 value={formData.message}
                 onChange={(e) =>
@@ -84,16 +90,13 @@ export default function Footer() {
                 className={styles.submitButton}
                 disabled={loading}
               >
-                {loading ? "Отправка..." : "Отправить"}
+                {loading ? "Отправка..." : "Отправить сообщение"}
               </button>
-              {error && <div className={styles.error}>{error}</div>}
-              {success && (
-                <div className={styles.success}>Сообщение отправлено!</div>
-              )}
+              {error && <p className={styles.error}>{error}</p>}
+              {success && <p className={styles.success}>Успешно отправлено!</p>}
             </form>
           </div>
         </Modal>
-
         <p className={styles.copyright}>
           © {new Date().getFullYear()} Geology. Все права защищены
         </p>

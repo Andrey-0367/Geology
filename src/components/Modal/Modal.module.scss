@@ -1,34 +1,53 @@
-.overlay {
+.modalOverlay {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1); // Полупрозрачная подложка
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  z-index: 50;
+  z-index: 1000;
 }
 
 .modalContent {
-  background-color: white;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  max-width: 28rem;
-  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
   position: relative;
-  color: #000;
+  max-width: 90%;
+  width: 500px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  animation: modalSlideIn 0.3s ease-out;
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 .closeButton {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  color: #6b7280;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
   font-size: 1.5rem;
-  line-height: 1;
+  color: #718096;
+  cursor: pointer;
   padding: 0.25rem;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: #374151;
+    color: #2d3748;
   }
 }

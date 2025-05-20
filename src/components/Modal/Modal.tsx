@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, ReactNode } from 'react'
+import { useEffect } from 'react'
 import styles from './Modal.module.scss'
 
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
@@ -21,13 +21,14 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen) return null
 
   return (
-    <div className={styles.overlay}>
+    <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <button
           onClick={onClose}
           className={styles.closeButton}
+          aria-label="Закрыть модальное окно"
         >
-          ×
+          &times;
         </button>
         {children}
       </div>
