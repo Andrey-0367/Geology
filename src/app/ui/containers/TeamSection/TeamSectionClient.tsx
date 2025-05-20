@@ -27,7 +27,7 @@ export function TeamSectionClient() {
 
   return (
     <section className={style.teamSection}>
-      <Title tag="h2">Наша команда</Title>
+      <Title tag="h1">Наша команда</Title>
 
       {!isMobile ? (
         <ul className={style.employeeList}>
