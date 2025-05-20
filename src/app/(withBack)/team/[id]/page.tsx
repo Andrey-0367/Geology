@@ -10,6 +10,7 @@ export interface TeamMember {
   employeePictureUrl: string;
   employeePositionsList: string[];
   employeeProfileLink: string;
+  bio?: string;
 }
 
 async function getTeamMember(id: number): Promise<TeamMember | undefined> {
@@ -25,7 +26,7 @@ export async function generateStaticParams() {
 export default async function TeamPageDetails({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   try {
 
