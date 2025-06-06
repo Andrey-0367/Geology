@@ -1,35 +1,29 @@
 import { notFound } from 'next/navigation';
 import styles from './page.module.scss';
 import { Title } from '@/components/Title/Title';
+import { getCategoryData } from '@/api/categories';
 
-
-// Добавьте функцию получения данных
-async function getCategoryData(id: string) {
-  try {
-    const response = await fetch(`https://api.example.com/categories/${id}`);
-    if (!response.ok) return null;
-    return response.json();
-  } catch (error) {
-    console.error(`Ошибка загрузки категории ${id}:`, error);
-    return null;
-  }
-}
 
 export default async function CategoryPage({
   params,
 }: {
   params: { id: string };
-}) {
-  const category = await getCategoryData(params.id);
   
-  if (!category) {
-    return notFound();
-  }
-
+}) {
+   try {
+ 
+     const { id } = await params;
+     const numericId = Number(id);
+     
+     if (isNaN(numericId)) return notFound();
+ 
+      const member = await  getCategoryData(id);
+     if (!member) return notFound();
   return (
     <div className={styles.container}>
-      <Title tag="h1">{category.name}</Title>
+      <Title tag="h1">category.name</Title>
     
     </div>
   );
-}
+   }
+  
