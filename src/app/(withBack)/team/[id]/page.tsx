@@ -6,19 +6,6 @@ import { getEmployeeData, getTeam } from '@/api/team';
 
 
 
-export async function generateStaticParams() {
-  try {
-    const team = await getTeam();
-    
-    return team.map(member => ({
-      id: member.id.toString(),
-    }));
-  } catch (error) {
-    console.error('Ошибка при генерации статических параметров:', error);
-    return [];
-  }
-}
-
 export default async function TeamPageDetails({
   params,
 }: {
