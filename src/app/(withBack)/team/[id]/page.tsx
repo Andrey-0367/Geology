@@ -1,26 +1,22 @@
 import { notFound } from 'next/navigation';
 import styles from "./page.module.scss";
-import { mockTeam } from '@/data/team';
 import { TeamDetails } from '@/app/ui/components/TeamDetails/TeamDetails';
 import { Title } from '@/components/Title/Title';
+import { getEmployeeData, getTeam } from '@/api/team';
 
-export interface TeamMember {
-  id: number;
-  employeeFullName: string;
-  employeePictureUrl: string;
-  employeePositionsList: string[];
-  employeeProfileLink: string;
-  bio?: string;
-}
 
-async function getTeamMember(id: number): Promise<TeamMember | undefined> {
-  return mockTeam.find(member => member.id === id);
-}
 
 export async function generateStaticParams() {
-  return mockTeam.map(member => ({
-    id: member.id.toString(),
-  }));
+  try {
+    const team = await getTeam();
+    
+    return team.map(member => ({
+      id: member.id.toString(),
+    }));
+  } catch (error) {
+    console.error('Ошибка при генерации статических параметров:', error);
+    return [];
+  }
 }
 
 export default async function TeamPageDetails({
@@ -35,13 +31,12 @@ export default async function TeamPageDetails({
     
     if (isNaN(numericId)) return notFound();
 
-    const member = await getTeamMember(numericId);
-
+     const member = await getEmployeeData(id);
     if (!member) return notFound();
 
     return (
       <div className={styles.container}>
-        <Title tag="h1">{member.employeeFullName}</Title>
+        <Title tag="h1">{member.full_name}</Title>
         <TeamDetails member={member} />
       </div>
     );

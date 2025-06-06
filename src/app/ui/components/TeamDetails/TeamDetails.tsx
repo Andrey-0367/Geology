@@ -4,38 +4,31 @@ import Image from "next/image";
 import styles from "./TeamDetails.module.scss";
 import { TeamMember } from "../CardTeam/CardTeam";
 
-
 interface TeamDetailsProps {
   member: TeamMember;
 }
 
 export const TeamDetails = ({ member }: TeamDetailsProps) => {
+   const photoUrl = member.photo || "/default-avatar.jpg";
   return (
     <article className={styles.details}>
       <div className={styles.imageContainer}>
         <Image
-          src={member.employeePictureUrl}
-          alt={member.employeeFullName}
+          src={photoUrl} 
+          alt={member.full_name}
           width={400}
           height={500}
           className={styles.image}
           priority
         />
       </div>
-      
+
       <div className={styles.content}>
-        
-        <ul className={styles.positions}>
-          {member.employeePositionsList.map((position, index) => (
-            <li key={index} className={styles.position}>
-              {position}
-            </li>
-          ))}
-        </ul>
+        <p className={styles.positions}>{member.positions}</p>
 
         {member.bio && (
           <div className={styles.bio}>
-            {member.bio.split('\n').map((line, index) => (
+            {member.bio.split("\n").map((line, index) => (
               <p key={index}>{line}</p>
             ))}
           </div>

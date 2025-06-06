@@ -1,10 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export',
   basePath: '/Geology',
   trailingSlash: true,
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '83.166.245.78',
+        port: '',
+        pathname: '/media/**',
+      },
+    ],
   },
   env: {
     EMAIL_USER: process.env.EMAIL_USER,

@@ -1,0 +1,20 @@
+.categoryCard {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    text-decoration: none;
+  }
+  
+  h3 {
+    margin: 0;
+    padding: 1rem;
+    background: rgba(0,0,0,0.7);
+    color: white;
+  }
+}

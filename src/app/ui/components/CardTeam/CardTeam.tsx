@@ -8,13 +8,14 @@ const slimCardPictureHeight = 334;
 const wideCardPictureWidth = 262;
 const wideCardPictureHeight = 349;
 
+
 export interface TeamMember {
   id: number;
-  employeeFullName: string;
-  employeePictureUrl: string;
-  employeePositionsList: string[];
-  employeeProfileLink: string;
-  bio?: string;
+  full_name: string;
+  photo: string | null;
+  positions: string;
+  bio: string;
+  profile_link: string;
 }
 
 export interface CardTeamUIProps extends TeamMember {
@@ -25,6 +26,7 @@ export const CardTeamUI = (props: CardTeamUIProps) => {
   if (!props || !props.id) {
     return <div className={styles.error}>Ошибка загрузки карточки</div>;
   }
+  const decodedPhoto = props.photo ? decodeURIComponent(props.photo) : null;
   return (
     <Link href={`/team/${props.id}`}>
       <div
@@ -42,11 +44,11 @@ export const CardTeamUI = (props: CardTeamUIProps) => {
                 : styles.employeeImageContainerSlimCard,
             ])}
           >
-            {props.employeePictureUrl ? (
+            {decodedPhoto ? (
               <div className={styles.imageWrapper}>
                 <Image
-                  src={props.employeePictureUrl}
-                  alt={`Фотография ${props.employeeFullName}`}
+                  src={decodedPhoto}
+                  alt={`Фотография ${props.full_name}`}
                   fill
                   style={{
                     objectFit: "cover",
@@ -54,11 +56,12 @@ export const CardTeamUI = (props: CardTeamUIProps) => {
                   }}
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  unoptimized={true} 
                 />
               </div>
             ) : (
               <div className={styles.defaultAvatar}>
-                {props.employeeFullName
+                {props.full_name
                   .split(" ")
                   .map((n) => n[0])
                   .join("")}
@@ -74,21 +77,12 @@ export const CardTeamUI = (props: CardTeamUIProps) => {
                 : styles.employeeFullNameSlimCard,
             ])}
           >
-            {props.employeeFullName}
+            {props.full_name}
           </h2>
         </div>
-        <ul className={styles.positionsList}>
-          {props.employeePositionsList.map((position: string, index: any) => {
-            return (
-              <li
-                key={`${props.id}-${position}-${index}`}
-                className={styles.employeePosition}
-              >
-                {position}
-              </li>
-            );
-          })}
-        </ul>
+        <div className={styles.positionsList}>
+          <p className={styles.employeePosition}>{props.positions}</p>
+        </div>
       </div>
     </Link>
   );

@@ -2,28 +2,30 @@
 
 import { useState, useEffect } from "react";
 import style from "./TeamSection.module.scss";
-import { CardTeamUI } from "@/app/ui/components/CardTeam/CardTeam";
+import { CardTeamUI, TeamMember } from "@/app/ui/components/CardTeam/CardTeam";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useMediaQuery } from "react-responsive";
-import { useRouter } from "next/navigation";
-import { mockTeam } from "@/data/team";
 import { Title } from "@/components/Title/Title";
 
+interface TeamSectionClientProps {
+  data: TeamMember[];
+}
 
-
-export function TeamSectionClient() {
+export function TeamSectionClient({ data }: TeamSectionClientProps) {
   const [isMounted, setIsMounted] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   if (!isMounted) return null;
+   if (!data || data.length === 0) {
+    return <div className={style.error}>Нет данных о команде</div>;
+  }
 
   return (
     <section className={style.teamSection}>
@@ -31,7 +33,7 @@ export function TeamSectionClient() {
 
       {!isMobile ? (
         <ul className={style.employeeList}>
-          {mockTeam.map((item) => (
+          {data.map((item) => (
             <li className={style.employee} key={item.id}>
               <CardTeamUI
                 {...item}
@@ -50,7 +52,7 @@ export function TeamSectionClient() {
             modules={[Pagination]}
             className={style.swiperContainer}
           >
-            {mockTeam.map((item) => (
+            {data.map((item) => (
               <SwiperSlide key={item.id} className={style.swiperSlide}>
                 <CardTeamUI
                   {...item}
