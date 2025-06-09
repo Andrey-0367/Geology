@@ -3,17 +3,11 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import styles from './CardSale.module.scss';
+import { SaleItem } from '@/types/sale';
 
-interface CardSaleUIProps {
-  id: number;
-  title: string;
-  imageUrl: string;
-  oldPrice: number;
-  newPrice: number;
-}
 
-const CardSaleUI: React.FC<CardSaleUIProps> = ({
-  id,
+const CardSaleUI: React.FC<SaleItem> = ({
+  slug,
   title,
   imageUrl,
   oldPrice,
@@ -25,7 +19,7 @@ const CardSaleUI: React.FC<CardSaleUIProps> = ({
   );
 
   const handleClick = () => {
-    router.push(`/sale/${id}`);
+   router.push(`/sale/${slug}`);
   };
 
   return (

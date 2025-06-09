@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/Geology',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   trailingSlash: true,
   images: {
     remotePatterns: [

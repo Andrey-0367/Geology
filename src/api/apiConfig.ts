@@ -11,12 +11,14 @@ type ApiConfig = {
   };
   categories: ApiResource;
   employees: ApiResource;
-  sales: {
-    active: ApiEndpoint;
+  saleItems: {
+    list: ApiEndpoint;
     detail: ApiEndpoint<[string]>;
+    images: ApiEndpoint<[number]>; 
   };
 };
 
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
 export const BASE_URL = process.env.NEXT_PUBLIC_DOMAIN;
 const API_VERSION = process.env.NEXT_PUBLIC_API_VERSION;
 
@@ -39,8 +41,9 @@ export const API: ApiConfig = {
     list: buildUrl("employees"),
     detail: (id) => buildUrl(`employees/${id}`),
   },
-  sales: {
-    active: buildUrl("sales/active"),
-    detail: (id) => buildUrl(`sales/${id}`),
+ saleItems: {
+    list: buildUrl("sale-items/"),
+    detail: (slug) => buildUrl(`sale-items/${slug}/`),
+    images: (itemId) => buildUrl(`sale-item-images/?sale_item=${itemId}`),
   },
 };

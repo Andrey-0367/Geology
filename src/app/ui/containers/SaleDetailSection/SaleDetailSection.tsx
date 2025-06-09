@@ -8,11 +8,8 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import styles from "./SaleDetailSection.module.scss";
 
-interface SaleDetailSectionProps {
-  images: string[];
-}
 
-export const SaleDetailSection = ({ images }: SaleDetailSectionProps) => {
+export const SaleDetailSection = ({ imageUrls }: { imageUrls: string[] }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -23,7 +20,7 @@ export const SaleDetailSection = ({ images }: SaleDetailSectionProps) => {
 
   return (
     <div className={styles.container}>
-      {images.length > 0 ? (
+      {imageUrls.length > 0 ? (
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -50,7 +47,7 @@ export const SaleDetailSection = ({ images }: SaleDetailSectionProps) => {
           modules={[EffectCoverflow, Pagination]}
           className={styles.swiperContainer}
         >
-          {images.map((src, index) => (
+          {imageUrls.map((src, index) => (
             <SwiperSlide key={index} className={styles.swiperSlide}>
               <img 
                 src={src} 

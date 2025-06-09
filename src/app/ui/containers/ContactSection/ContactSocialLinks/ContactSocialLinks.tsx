@@ -13,32 +13,32 @@ type TSocialLinksIcons = {
 
 export const socialLinksIcons = [
   {
-    imgSRC: "/Geology/icon_vk.png",
+    imgSRC: "/geology/icon_vk.png",
     imgALT: "ВКонтакте",
     link: "#",
   },
   {
-    imgSRC: "/Geology/icon_odnoklassniki.png",
+    imgSRC: "/geology/icon_odnoklassniki.png",
     imgALT: "Одноклассники",
     link: "#",
   },
   {
-    imgSRC: "/Geology/icon_dzen.png",
+    imgSRC: "/geology/icon_dzen.png",
     imgALT: "Дзен",
     link: "#",
   },
   {
-    imgSRC: "/Geology/icon_telegram.png",
+    imgSRC: "/geology/icon_telegram.png",
     imgALT: "Telegram",
     link: "https://t.me/adrey_vasilich",
   },
   {
-    imgSRC: "/Geology/icon_rutube.png",
+    imgSRC: "/geology/icon_rutube.png",
     imgALT: "Rutube",
     link: "#",
   },
   {
-    imgSRC: "/Geology/icon_youtube.png",
+    imgSRC: "/geology/icon_youtube.png",
     imgALT: "YouTube",
     link: "#",
   },

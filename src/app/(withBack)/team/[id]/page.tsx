@@ -4,7 +4,13 @@ import { TeamDetails } from '@/app/ui/components/TeamDetails/TeamDetails';
 import { Title } from '@/components/Title/Title';
 import { getEmployeeData, getTeam } from '@/api/team';
 
-
+export async function generateStaticParams() {
+  const team = await getTeam();
+  
+  return team.map(member => ({
+    id: member.id.toString() 
+  }));
+}
 
 export default async function TeamPageDetails({
   params,

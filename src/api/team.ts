@@ -17,7 +17,7 @@ export async function getTeam(): Promise<TeamMember[]> {
     return data.map((employee: any) => ({
       id: employee.id,
       full_name: employee.full_name,
-      photo: employee.photo_url || "/default-avatar.jpg",
+      photo: employee.photo_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`,
       positions: employee.positions || "",
       bio: employee.bio || "",
       profile_link: `/team/${employee.id}`,
@@ -41,7 +41,7 @@ export async function getEmployeeData(id: string): Promise<TeamMember | null> {
     return {
       id: employee.id,
       full_name: employee.full_name,
-      photo: employee.photo_url || "/default-avatar.jpg",
+      photo: employee.photo_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`,
       positions: employee.positions || "",
       bio: employee.bio || "",
       profile_link: `/team/${employee.id}`,

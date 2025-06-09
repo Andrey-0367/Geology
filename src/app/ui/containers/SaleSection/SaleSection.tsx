@@ -1,20 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./SaleSection.module.scss";
-import { mockProducts } from "./mock";
 import CardSaleUI from "@/components/CardSale/CardSale";
+import { SaleItem } from "@/types/sale";
+import { getSale } from "@/api/sale";
 
 export default function SaleSection() {
-  const [visibleItems] = useState(6);
+  const [items, setItems] = useState<SaleItem[]>([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const data = await getSale();
+      setItems(data);
+    };
+    fetchItems();
+  }, []);
 
   return (
     <section className={styles.saleSection}>
       <div className={styles.grid}>
-        {mockProducts.map((product) => (
-           <CardSaleUI
-            key={product.id}
-            {...product}
+        {items.map((item) => (
+          <CardSaleUI
+            key={item.id}
+            {...item}
           />
         ))}
       </div>

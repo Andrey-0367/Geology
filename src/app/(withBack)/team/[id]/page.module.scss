@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: clamp(2.5rem, 2.083rem + 1.85vw, 3.75rem);
+  padding: 0 100px;
+   @media (width <= 768px) {
+    padding: 0 20px;
+   }
+}

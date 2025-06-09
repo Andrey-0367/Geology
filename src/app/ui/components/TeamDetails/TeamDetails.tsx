@@ -9,7 +9,7 @@ interface TeamDetailsProps {
 }
 
 export const TeamDetails = ({ member }: TeamDetailsProps) => {
-   const photoUrl = member.photo || "/default-avatar.jpg";
+   const photoUrl = member.photo || "/images/skoro.jpg";
   return (
     <article className={styles.details}>
       <div className={styles.imageContainer}>

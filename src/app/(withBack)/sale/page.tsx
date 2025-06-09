@@ -6,9 +6,7 @@ export default function SalePage() {
   return (
     <div className={styles.container}>
       <Title tag={"h1"}>Распродажа</Title>
-     
-        <SaleSection />
-    
+        <SaleSection />  
     </div>
   );
 }
