@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 export type TabType = {
   id: string;
   title: string;
-  content: ReactNode | null; // Разрешено null для отсутствия контента
+  content: ReactNode | null; 
 };
 
 export type TabsProps = {

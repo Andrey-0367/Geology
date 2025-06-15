@@ -1,9 +1,16 @@
 import React from 'react';
 import styles from './ProductCard.module.scss';
 import { Product } from '@/types/products';
+import { Category } from '@/types/category';
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+type ProductCardProps = {
+  product: Product;
+  category: Category; 
+};
+
+const ProductCard: React.FC<ProductCardProps> = ({ product, category }) => {
   const mainImage = product.images.find(img => img.is_main) || product.images[0];
+
   
   const fullName = [
     product.name,
