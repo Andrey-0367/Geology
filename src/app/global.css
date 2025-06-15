@@ -19,11 +19,7 @@ body {
 }
 
 .dnd-body {
- background: linear-gradient(
-  to bottom left,
-  #0db3ea 30%,   /* темный цвет занимает 30% пространства */
-  #A3C7D6 70%    /* плавный переход начинается с 70% */
-);
+ background: transparent;
   min-height: 100vh;
   margin: 0;
   font-family: var(--font-maitree), sans-serif;

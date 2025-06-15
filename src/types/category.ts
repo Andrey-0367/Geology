@@ -1,7 +1,10 @@
-export interface Category {
-  id: string
-  name: string
-  description?: string
-  image_url?: string
-  slug: string
-}
+export type Category = {
+  id: string;
+  name: string;
+  imageUrl: string; 
+};
+
+export type CategoryCardProps = {
+  category: Category;
+  onClick?: () => void;
+};

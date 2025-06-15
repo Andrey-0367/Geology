@@ -1,0 +1,104 @@
+.section {
+  padding: 40px 20px;
+  background: transparent;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 30px;
+}
+
+.menuColumn {
+  flex: 0 0 280px;
+}
+
+.contentColumn {
+  flex: 1;
+  min-width: 0; // Для корректного сжатия
+}
+
+.backButton {
+  display: block;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+  
+  &:hover {
+    background: #e0e0e0;
+  }
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.cardWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 1200px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    gap: 20px;
+  }
+  
+  .cardsGrid {
+    gap: 16px;
+  }
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .menuColumn {
+    display: none;
+  }
+  
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section {
+    padding: 30px 15px;
+  }
+  
+  .backButton {
+    margin: 0 auto 20px auto;
+  }
+}

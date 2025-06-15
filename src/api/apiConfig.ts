@@ -30,7 +30,7 @@ export const buildUrl = (path: string) => {
 export const API: ApiConfig = {
   products: {
     list: buildUrl("products"),
-    byCategory: (categoryId) => buildUrl(`products/category/${categoryId}`),
+    byCategory: (categoryId) => buildUrl(`products?category=${categoryId}`),
     detail: (id) => buildUrl(`products/${id}`),
   },
   categories: {

@@ -1,35 +1,83 @@
-.container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+.productList {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.categoryTitle {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #1a1a1a;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
 }
 
-.productGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
+.categoryInfo {
+  flex: 1;
+}
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+.categoryName {
+  font-size: 28px;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.productCount {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Табличная разметка */
+.productsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  border-bottom: 2px solid #eee;
+  
+  th:last-child {
+    width: 100px;
   }
 }
 
-.empty {
+.tableHeader th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+
+.productsContainer {
+  margin-top: 0;
+}
+
+.emptyMessage {
+  padding: 40px 0;
   text-align: center;
-  font-size: 1.5rem;
   color: #666;
-  padding: 4rem 0;
-  margin: 0 auto;
-  max-width: 600px;
+  font-size: 1.2rem;
+}
+
+/* Мобильное представление */
+.mobileView {
+  display: none;
+}
+
+/* Адаптация */
+@media (max-width: 768px) {
+  .desktopView {
+    display: none;
+  }
+  
+  .mobileView {
+    display: block;
+  }
+  
+  .categoryHeader {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
 }

@@ -80,26 +80,20 @@ export default function Header() {
           className={`${styles.mainMenu} ${isMenuOpen ? styles.open : ''}`}
         >
           <Link 
+            href="/shop" 
+            className={styles.menuLink}
+            onClick={toggleMenu}
+          >
+            Каталог
+          </Link>
+          <Link 
             href="/about" 
             className={styles.menuLink}
             onClick={toggleMenu}
           >
             О нас
           </Link>
-          <Link 
-            href="/sale" 
-            className={styles.menuLink}
-            onClick={toggleMenu}
-          >
-            Распродажа
-          </Link>
-          <Link 
-            href="/shop" 
-            className={styles.menuLink}
-            onClick={toggleMenu}
-          >
-            Магазин
-          </Link>
+          
         </div>
       </nav>
     </header>
