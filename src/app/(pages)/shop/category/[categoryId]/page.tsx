@@ -20,22 +20,23 @@ export default async function CategoryDetails({
   try {
 
     const { categoryId } = await params;
+    
     const [category, products] = await Promise.all([
-    getCategoryData(categoryId),
-    getCategoryProducts(categoryId)
-  ]);
+      getCategoryData(categoryId),
+      getCategoryProducts(categoryId)
+    ]);
 
-   if (!category) return notFound();
+    if (!category) return notFound();
 
-  return (
-   <div className={styles.container}>
-      <CatalogSection 
-        activeCategory={category}
-         products={products || []}
-      />
-    </div>
-  );
-}catch (error) {
+    return (
+      <div className={styles.container}>
+        <CatalogSection 
+          activeCategory={category}
+          products={products || []}
+        />
+      </div>
+    );
+  } catch (error) {
     console.error("Error loading shop:", error);
     return notFound();
   }

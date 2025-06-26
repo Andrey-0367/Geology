@@ -8,7 +8,6 @@ export default async function ShopPage() {
   
   return (
     <div className={styles.container}>
-      {/* Передаем пустой объект вместо undefined */}
       <CatalogSection />
       <CategoryGrid categories={categories} />
     </div>

@@ -1,7 +1,7 @@
 export type Category = {
   id: string;
   name: string;
-  imageUrl: string; 
+  image_url: string; 
 };
 
 export type CategoryCardProps = {

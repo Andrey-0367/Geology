@@ -29,13 +29,13 @@ export const buildUrl = (path: string) => {
 
 export const API: ApiConfig = {
   products: {
-    list: buildUrl("products"),
-    byCategory: (categoryId) => buildUrl(`products?category=${categoryId}`),
-    detail: (id) => buildUrl(`products/${id}`),
+    list: buildUrl("products/"),
+    byCategory: (categoryId) => buildUrl(`products/?category=${categoryId}`),
+    detail: (id) => buildUrl(`products/${id}/`),
   },
   categories: {
     list: buildUrl("categories"),
-    detail: (id) => buildUrl(`categories/${id}`),
+    detail: (id) => buildUrl(`categories/${id}/`),
   },
   employees: {
     list: buildUrl("employees"),

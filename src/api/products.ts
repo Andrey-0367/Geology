@@ -13,8 +13,15 @@ export async function getCategoryProducts(categoryId: string): Promise<Product[]
 
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     
-    const data = await res.json();
-    return data.results || [];
+    const data = await res.json(); 
+
+    if (Array.isArray(data)) {
+      return data; 
+    } else if (data.results && Array.isArray(data.results)) {
+      return data.results; 
+    } else {
+      return []; 
+    }
   } catch (error) {
     console.error('Error fetching category products:', error);
     return [];

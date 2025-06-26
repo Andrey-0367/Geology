@@ -12,10 +12,14 @@ export async function fetchCategories(): Promise<Category[]> {
     }
     
     const data = await response.json();
-    return data.results.map((category: any) => ({
+    const categories = Array.isArray(data) 
+      ? data 
+      : (data.results || []);
+    
+    return categories.map((category: any) => ({
       id: category.id,
       name: category.name,
-      imageUrl: category.image
+      imageUrl: category.image_url || category.imageUrl || null,
     }));
   } catch (error) {
     console.error('Error fetching categories:', error);

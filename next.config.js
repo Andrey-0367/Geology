@@ -2,21 +2,25 @@
 const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   trailingSlash: true,
+  
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: '83.166.245.78',
+        protocol: 'https',
+        hostname: 'geologiya-ru.ru',
         port: '',
         pathname: '/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.geologiya-ru.ru',
+        port: '',
+        pathname: '/media/**',
+      }
     ],
+    unoptimized: true,
   },
-  env: {
-    EMAIL_USER: process.env.EMAIL_USER,
-    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
-    EMAIL_TO: process.env.EMAIL_TO,
-  },
+
   
   webpack: (config) => {
     config.resolve.alias = {
