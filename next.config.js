@@ -4,21 +4,7 @@ const nextConfig = {
   trailingSlash: true,
   
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'geologiya-ru.ru',
-        port: '',
-        pathname: '/media/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.geologiya-ru.ru',
-        port: '',
-        pathname: '/media/**',
-      }
-    ],
-    unoptimized: true,
+    domains: ['api.geologiya-ru.ru'],
   },
 
   

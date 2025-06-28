@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import styles from './CategoryCard.module.scss';
 import { CategoryCardProps } from '@/types/category';
@@ -13,9 +15,9 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
       role={onClick ? "button" : undefined} 
       tabIndex={onClick ? 0 : undefined}
     >
-      {category.image_url ? (
+      {category.imageUrl ? (
         <img 
-          src={category.image_url} 
+          src={category.imageUrl} 
           alt={category.name} 
           className={styles.image}
           onError={(e) => {

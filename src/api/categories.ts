@@ -19,7 +19,7 @@ export async function fetchCategories(): Promise<Category[]> {
     return categories.map((category: any) => ({
       id: category.id,
       name: category.name,
-      imageUrl: category.image_url || category.imageUrl || null,
+      imageUrl: category.image_url || null,
     }));
   } catch (error) {
     console.error('Error fetching categories:', error);
