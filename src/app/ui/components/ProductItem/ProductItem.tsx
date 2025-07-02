@@ -60,7 +60,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product, category }) => {
         <Link href={productPath} className={styles.productLink}>
           {fullName}
         </Link>
-        <div className={styles.description}>{product.description}</div>
+       
       </td>
       <td className={styles.quantityCell}>
         {product.quantity > 0 ? product.quantity : 'Под заказ'}

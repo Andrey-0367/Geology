@@ -19,9 +19,8 @@ body {
 }
 
 .dnd-body {
- background: transparent;
+  background: transparent;
   min-height: 100vh;
-  margin: 0;
   font-family: var(--font-maitree), sans-serif;
   color: #2b2003;
 }

@@ -59,7 +59,7 @@ export default function Header() {
             height={71}
             priority
           />
-          <span className={styles.logoText}>GEOLOGY</span>
+          <span className={styles.logoText}>МБО</span>
         </Link>
 
         {/* Бургер-кнопка */}

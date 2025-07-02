@@ -2,7 +2,10 @@ import { fetchCategories, getCategoryData } from "@/api/categories";
 import { notFound } from "next/navigation";
 import styles from "./page.module.scss";
 import { getCategoryProducts } from "@/api/products";
-import CatalogSection from "@/app/ui/components/CatalogSection/CatalogSection";
+import CatalogMenu from "@/app/ui/components/CatalogMenu/CatalogMenu";
+import ShopLayout from "@/app/ui/components/ShopLayout/ShopLayout";
+import ProductFilters from "@/app/ui/components/ProductFilters/ProductFilters";
+import CategoryProducts from "@/app/ui/components/CategoryProducts/CategoryProducts";
 
 export async function generateStaticParams() {
   const categories = await fetchCategories();
@@ -18,22 +21,32 @@ export default async function CategoryDetails({
   params: Promise<{ categoryId: string }>;
 }) {
   try {
-
     const { categoryId } = await params;
     
-    const [category, products] = await Promise.all([
+    const [category, products, categories] = await Promise.all([
       getCategoryData(categoryId),
-      getCategoryProducts(categoryId)
+      getCategoryProducts(categoryId),
+      fetchCategories()
     ]);
 
     if (!category) return notFound();
 
+    const subCategories = categories.filter(c => c.parent === category.id);
+    
     return (
       <div className={styles.container}>
-        <CatalogSection 
-          activeCategory={category}
-          products={products || []}
-        />
+        <ShopLayout 
+          catalogMenu={<CatalogMenu categories={subCategories.length > 0 ? subCategories : categories} />}
+          filtersMenu={<ProductFilters products={products || []} />}
+        >
+          <div className={styles.productsSection}>
+            <h1 className={styles.categoryTitle}>{category.name}</h1>
+            <CategoryProducts 
+              products={products || []} 
+              currentCategory={category}  
+            />
+          </div>
+        </ShopLayout>
       </div>
     );
   } catch (error) {

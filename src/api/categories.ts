@@ -20,6 +20,7 @@ export async function fetchCategories(): Promise<Category[]> {
       id: category.id,
       name: category.name,
       imageUrl: category.image_url || null,
+      parent: category.parent || null,
     }));
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -38,7 +39,14 @@ export async function getCategoryData(id: string): Promise<Category | null> {
     });
 
     if (!res.ok) return null;
-    return await res.json();
+    
+    const category = await res.json();
+    return {
+      id: category.id,
+      name: category.name,
+      imageUrl: category.image_url || null,
+      parent: category.parent || null, 
+    };
   } catch (error) {
     console.error(`Ошибка загрузки данных категории ${id}:`, error);
     return null;
