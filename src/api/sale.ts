@@ -15,6 +15,7 @@ export async function getSale(): Promise<SaleItem[]> {
     return (results || []).map((item: any) => ({
       id: item.id.toString(),
       title: item.title,
+   
       imageUrl: item.main_image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`,
       description: item.description,
       oldPrice: parseFloat(item.old_price),
