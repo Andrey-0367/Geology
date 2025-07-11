@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export",
+    "deploy": "npm run export && git checkout gh-pages && find . ! -name '.git' ! -name '.nojekyll' -maxdepth 1 -exec rm -rf {} + && mv ../out/* . && git add . && git commit -m 'Deploy' && git push origin gh-pages && git checkout -",
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf .next node_modules/.cache"
