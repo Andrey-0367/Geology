@@ -11,14 +11,11 @@ export async function getSale(): Promise<SaleItem[]> {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const { results } = await response.json();
-    const baseUrl = process.env.NEXT_PUBLIC_DOMAIN || '';
-
+    
     return (results || []).map((item: any) => ({
       id: item.id.toString(),
       title: item.title,
-      imageUrl: item.main_image 
-        ? baseUrl + item.main_image 
-        : `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`,
+      imageUrl: item.main_image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`,
       description: item.description,
       oldPrice: parseFloat(item.old_price),
       newPrice: parseFloat(item.new_price),
@@ -42,9 +39,8 @@ export async function getSaleDetails(slug: string): Promise<SaleDetails | null> 
     
     const item = await res.json();
     
-    // Получаем основное изображение напрямую из API
-    const mainImage = item.main_image 
-      ? item.main_image 
+    const mainImage = item.main_image_url 
+      ? item.main_image_url 
       : `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`;
 
     return {

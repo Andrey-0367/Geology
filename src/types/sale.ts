@@ -1,11 +1,11 @@
 export interface SaleItem {
-  id: number;
+  id: string;
   title: string;
-  imageUrl: string;
+  imageUrl: string; 
   description: string;
   oldPrice: number;
   newPrice: number;
-  slug: string; 
+  slug: string;
 }
 
 export interface SaleDetails extends SaleItem {

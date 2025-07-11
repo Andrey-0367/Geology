@@ -22,10 +22,9 @@ export const SaleDetailSection = ({ itemId }: { itemId: number }) => {
         const data = await response.json();
         
         const imageUrls = data.results.map((img: any) => 
-  img.image.startsWith('http') 
-    ? img.image 
-    : `${BASE_URL}${img.image}`
-);
+          img.image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`
+        );
+        
         setImages(imageUrls);
       } catch (error) {
         console.error("Error fetching images:", error);

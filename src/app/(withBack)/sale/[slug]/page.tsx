@@ -24,6 +24,7 @@ export default async function SaleDetailPage({
       <div className={styles.container}>
         <Title tag={"h1"}>{sale.title || "Без названия"}</Title>
         <SaleDetailSection itemId={Number(sale.id)} />
+
         <div className={styles.priceContainer}>
           <span className={styles.oldPrice}>
             {(sale.oldPrice ?? 0).toFixed(2)} ₽
