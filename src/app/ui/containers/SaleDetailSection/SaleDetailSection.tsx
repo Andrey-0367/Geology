@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import styles from "./SaleDetailSection.module.scss";
-import { API } from "@/api/apiConfig";
+import { API, BASE_URL } from "@/api/apiConfig";
 
 export const SaleDetailSection = ({ itemId }: { itemId: number }) => {
   const [images, setImages] = useState<string[]>([]);
@@ -21,9 +21,11 @@ export const SaleDetailSection = ({ itemId }: { itemId: number }) => {
         
         const data = await response.json();
         
-        // Используем изображения напрямую из API без добавления базового URL
-        const imageUrls = data.results.map((img: any) => img.image);
-        
+        const imageUrls = data.results.map((img: any) => 
+  img.image.startsWith('http') 
+    ? img.image 
+    : `${BASE_URL}${img.image}`
+);
         setImages(imageUrls);
       } catch (error) {
         console.error("Error fetching images:", error);
