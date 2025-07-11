@@ -1,6 +1,7 @@
 .footer {
-  background: #0db3ea;
-  color: #ffffff;
+  background: #f4f4ed;
+  border-top: 1px solid #b6b699 ;
+  color: #2c2a2a;
   padding: 2rem 0;
   margin-top: auto;
   position: relative;
@@ -15,9 +16,9 @@
 }
 
 .contactButton {
-  background: none;
-  border: 2px solid #ffffff;
-  color: #ffffff;
+  background: #cdcdc7;
+  border: 2px solid #2c2a2a;
+  color: #2c2a2a;
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
   font-size: 1rem;
@@ -62,7 +63,7 @@
 
     &:focus {
       outline: none;
-      border-color: #4299e1;
+      border-color: rgb(199, 194, 194);
       box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
     }
   }
@@ -73,7 +74,7 @@
   }
 
   .submitButton {
-    background: #4299e1;
+    background: rgb(199, 194, 194);
     color: white;
     padding: 1rem;
     border: none;
@@ -84,7 +85,7 @@
     transition: all 0.3s ease;
 
     &:hover:not(:disabled) {
-      background: #3182ce;
+      background: rgb(199, 194, 194);
       transform: translateY(-1px);
     }
 

@@ -1,47 +1,56 @@
-import { TeamMember } from '@/app/ui/components/CardTeam/CardTeam';
-import { API } from './apiConfig';
+import { TeamMember } from "@/app/ui/components/CardTeam/CardTeam";
+import { API } from "./apiConfig";
 
 export async function getTeam(): Promise<TeamMember[]> {
   try {
     const response = await fetch(API.employees.list, {
       headers: { Accept: "application/json" },
-      next: { revalidate: 3600 }
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
-    
-    return data.map((employee: any) => ({
+    const responseData = await response.json();
+
+    // Извлекаем массив сотрудников из свойства results
+    const employeesArray = responseData.results || [];
+
+    return employeesArray.map((employee: any) => ({
       id: employee.id,
       full_name: employee.full_name,
-      photo: employee.photo_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`,
+      photo:
+        employee.photo_url ||
+        employee.photo ||
+        `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/images/skoro.jpg`,
       positions: employee.positions || "",
       bio: employee.bio || "",
       profile_link: `/team/${employee.id}`,
     }));
   } catch (error) {
     console.error("Ошибка загрузки команды:", error);
-    return []; 
+    return [];
   }
 }
 
 export async function getEmployeeData(id: string): Promise<TeamMember | null> {
   try {
-    const response = await fetch(API.employees.detail(id), { 
-      next: { revalidate: 60 } 
+    const response = await fetch(API.employees.detail(id), {
+      next: { revalidate: 60 },
     });
 
     if (!response.ok) return null;
-    
+
     const employee = await response.json();
-    
+
     return {
       id: employee.id,
       full_name: employee.full_name,
-      photo: employee.photo_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`,
+      photo:
+        employee.photo_url ||
+        employee.photo ||
+        `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/images/skoro.jpg`,
       positions: employee.positions || "",
       bio: employee.bio || "",
       profile_link: `/team/${employee.id}`,

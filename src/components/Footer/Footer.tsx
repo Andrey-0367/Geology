@@ -24,31 +24,9 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className={styles.contactButton}
-          aria-label="Открыть форму обратной связи"
-        >
-          Написать нам
-        </button>
-
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <div className={styles.modalForm} ref={modalRef}>
-            <h2 className={styles.modalTitle}>Обратная связь</h2>
-            <ContactForm 
-              onSuccess={handleSuccess}
-              customStyles={{
-                form: styles.contactForm,
-                input: styles.formInput,
-                textarea: styles.formTextarea,
-                submitButton: styles.formSubmitButton
-              }}
-            />
-          </div>
-        </Modal>
-        
+       
         <p className={styles.copyright}>
-          © {new Date().getFullYear()} Geology. Все права защищены
+          © {new Date().getFullYear()} МБО. Все права защищены
         </p>
       </div>
     </footer>

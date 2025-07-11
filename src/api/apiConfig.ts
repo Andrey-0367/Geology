@@ -1,4 +1,6 @@
-type ApiEndpoint<T extends any[] = []> = T extends [] ? string : (...args: T) => string;
+type ApiEndpoint<T extends any[] = []> = T extends []
+  ? string
+  : (...args: T) => string;
 
 type ApiResource = {
   list: ApiEndpoint;
@@ -14,18 +16,28 @@ type ApiConfig = {
   saleItems: {
     list: ApiEndpoint;
     detail: ApiEndpoint<[string]>;
-    images: ApiEndpoint<[number]>; 
+    images: ApiEndpoint<[number]>;
+  };
+  orders: {
+    create: ApiEndpoint;
+    list: ApiEndpoint;
+    detail: ApiEndpoint<[string | number]>;
+  };
+  contact: {
+    create: ApiEndpoint;
   };
 };
 
-export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 export const BASE_URL = process.env.NEXT_PUBLIC_DOMAIN;
 const API_VERSION = process.env.NEXT_PUBLIC_API_VERSION;
+
 
 export const buildUrl = (path: string) => {
   const base = `${BASE_URL}/api`;
   return API_VERSION ? `${base}/${API_VERSION}/${path}` : `${base}/${path}`;
 };
+
 
 export const API: ApiConfig = {
   products: {
@@ -41,9 +53,17 @@ export const API: ApiConfig = {
     list: buildUrl("employees"),
     detail: (id) => buildUrl(`employees/${id}`),
   },
- saleItems: {
+  saleItems: {
     list: buildUrl("sale-items/"),
     detail: (slug) => buildUrl(`sale-items/${slug}/`),
     images: (itemId) => buildUrl(`sale-item-images/?sale_item=${itemId}`),
   },
-};
+  orders: {
+    create: buildUrl("orders/"),
+    list: buildUrl("orders/"),
+    detail: (id) => buildUrl(`orders/${id}/`),
+  },
+  contact: {
+    create: buildUrl("contact/"),
+  },
+} as const;

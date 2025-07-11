@@ -1,13 +1,18 @@
 /** @type {import('next').NextConfig} */
+const isDev = process.env.NODE_ENV === 'development';
+
 const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   trailingSlash: true,
   
   images: {
-    domains: ['api.geologiya-ru.ru'],
+    domains: [
+      'api.geologiya-ru.ru',
+      'geologiya-ru.ru',
+      'www.geologiya-ru.ru'
+    ],
   },
 
-  
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

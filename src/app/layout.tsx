@@ -5,6 +5,8 @@ import { Inter } from 'next/font/google'
 import './global.css'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
+import { CartProvider } from '@/contexts/CartContext'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className="dnd-body">
-        <Header />
-        <main className="mainContent">{children}</main>
-        <Footer />
+         <CartProvider>
+          <Header />
+          <main className="mainContent">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   )

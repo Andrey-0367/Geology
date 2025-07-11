@@ -1,17 +1,18 @@
 'use client';
 
+import { Suspense, useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import styles from './ProductFilters.module.scss';
-import { useMemo } from 'react';
 import { Product } from '@/types/products';
+import Loading from '@/app/loading';
 
 // Функция для нормализации значений
 const normalizeValue = (value: string) => {
   return value
     .trim()
     .toLowerCase()
-    .replace(/\s+/g, ' ') // Заменяем множественные пробелы на один
-    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ''); // Удаляем спецсимволы
+    .replace(/\s+/g, ' ')
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
 };
 
 // Функция для получения уникальных значений параметра
@@ -31,7 +32,8 @@ const getUniqueValues = (products: Product[], property: keyof Product) => {
   return Array.from(valuesMap.values());
 };
 
-export default function ProductFilters({ products }: { products: Product[] }) {
+// Внутренний компонент, использующий хуки навигации
+const ProductFiltersContent = ({ products }: { products: Product[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -70,12 +72,7 @@ export default function ProductFilters({ products }: { products: Product[] }) {
 
   // Обновление URL при изменении фильтра
   const handleFilterChange = (filterType: string, value: string) => {
-    const newParams = new URLSearchParams();
-    
-    // Копируем текущие фильтры
-    for (const [key, val] of Object.entries(currentFilters)) {
-      newParams.set(key, val);
-    }
+    const newParams = new URLSearchParams(searchParams.toString());
     
     // Если фильтр уже применен - снимаем
     if (newParams.get(filterType) === value) {
@@ -83,9 +80,6 @@ export default function ProductFilters({ products }: { products: Product[] }) {
     } else {
       newParams.set(filterType, value);
     }
-    
-    // Очищаем URL от пустых параметров
-    cleanUrlParams(newParams);
     
     // Формируем новый URL
     const newUrl = `${pathname}?${newParams.toString()}`;
@@ -95,19 +89,6 @@ export default function ProductFilters({ products }: { products: Product[] }) {
   // Сброс всех фильтров
   const clearFilters = () => {
     router.push(pathname);
-  };
-
-  // Очистка пустых параметров
-  const cleanUrlParams = (params: URLSearchParams) => {
-    const keysToDelete: string[] = [];
-    
-    for (const [key, value] of params.entries()) {
-      if (!value.trim()) {
-        keysToDelete.push(key);
-      }
-    }
-    
-    keysToDelete.forEach(key => params.delete(key));
   };
 
   if (Object.keys(filterGroups).length === 0) return null;
@@ -153,4 +134,15 @@ export default function ProductFilters({ products }: { products: Product[] }) {
       ))}
     </div>
   );
-}
+};
+
+// Основной компонент с Suspense boundary
+const ProductFilters = ({ products }: { products: Product[] }) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <ProductFiltersContent products={products} />
+    </Suspense>
+  );
+};
+
+export default ProductFilters;

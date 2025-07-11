@@ -1,17 +1,13 @@
 import { useState } from 'react';
-import styles from './ContactForm.module.scss'; 
+import styles from './ContactForm.module.scss';
+import { API } from '@/api/apiConfig';
+
 
 interface ContactFormProps {
   onSuccess?: () => void;
-  customStyles?: {
-    form?: string;
-    input?: string;
-    textarea?: string;
-    submitButton?: string;
-  };
 }
 
-const ContactForm = ({ onSuccess, customStyles }: ContactFormProps) => {
+const ContactForm = ({ onSuccess }: ContactFormProps) => {
   const [formData, setFormData] = useState({
     email: '',
     message: ''
@@ -24,29 +20,31 @@ const ContactForm = ({ onSuccess, customStyles }: ContactFormProps) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setSuccess(false);
 
     try {
-      const response = await fetch('http://localhost:8000/api/contact/', { // Замените на ваш домен
+      const response = await fetch(API.contact.create, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Ошибка при отправке сообщения');
+        // Обработка ошибок валидации Django
+        const errors = Object.values(data).flat().join(', ');
+        throw new Error(errors || 'Ошибка при отправке сообщения');
       }
 
       setSuccess(true);
-      onSuccess?.(); 
-      setFormData({ email: '', message: '' }); // Очистка формы
-      setTimeout(() => setSuccess(false), 3000); // Скрыть сообщение об успехе через 3 секунды
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Произошла неизвестная ошибка');
-      setTimeout(() => setError(null), 3000); // Скрыть сообщение об ошибке через 3 секунды
+      onSuccess?.();
+      setFormData({ email: '', message: '' });
+      
+      // Автоскрытие сообщения
+      setTimeout(() => setSuccess(false), 3000);
+    } catch (err: any) {
+      setError(err.message || 'Неизвестная ошибка');
+      setTimeout(() => setError(null), 3000);
     } finally {
       setLoading(false);
     }
@@ -55,58 +53,43 @@ const ContactForm = ({ onSuccess, customStyles }: ContactFormProps) => {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.formGroup}>
-        <label htmlFor="email" className={styles.label}>Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
           placeholder="Ваш Email"
-          className={styles.input}
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={(e) => setFormData({...formData, email: e.target.value})}
           required
           disabled={loading}
         />
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="message" className={styles.label}>Сообщение:</label>
+        <label htmlFor="message">Сообщение:</label>
         <textarea
           id="message"
           placeholder="Ваше сообщение"
-          className={styles.textarea}
           value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          onChange={(e) => setFormData({...formData, message: e.target.value})}
           required
           rows={5}
           disabled={loading}
         />
       </div>
 
-      <button
-        type="submit"
-        className={styles.submitButton}
+      <button 
+        type="submit" 
         disabled={loading}
+        className={styles.submitButton}
       >
-        {loading ? (
-          <span className={styles.buttonLoader}>Отправка...</span>
-        ) : (
-          'Отправить сообщение'
-        )}
+        {loading ? 'Отправка...' : 'Отправить сообщение'}
       </button>
 
-      {error && (
-        <div className={styles.errorMessage}>
-          ⚠️ {error}
-        </div>
-      )}
-
-      {success && (
-        <div className={styles.successMessage}>
-          ✅ Сообщение успешно отправлено!
-        </div>
-      )}
+      {error && <div className={styles.error}>⚠️ {error}</div>}
+      {success && <div className={styles.success}>✅ Сообщение отправлено!</div>}
     </form>
   );
 };
 
-export default ContactForm; 
+export default ContactForm;

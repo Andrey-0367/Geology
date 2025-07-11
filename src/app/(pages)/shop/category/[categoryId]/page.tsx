@@ -5,7 +5,7 @@ import { getCategoryProducts } from "@/api/products";
 import CatalogMenu from "@/app/ui/components/CatalogMenu/CatalogMenu";
 import ShopLayout from "@/app/ui/components/ShopLayout/ShopLayout";
 import ProductFilters from "@/app/ui/components/ProductFilters/ProductFilters";
-import CategoryProducts from "@/app/ui/components/CategoryProducts/CategoryProducts";
+import ProductDisplay from "@/app/ui/components/ProductDisplay/ProductDisplay";
 
 export async function generateStaticParams() {
   const categories = await fetchCategories();
@@ -23,7 +23,7 @@ export default async function CategoryDetails({
   try {
     const { categoryId } = await params;
     
-    const [category, products, categories] = await Promise.all([
+     const [category, products, categories] = await Promise.all([
       getCategoryData(categoryId),
       getCategoryProducts(categoryId),
       fetchCategories()
@@ -41,9 +41,9 @@ export default async function CategoryDetails({
         >
           <div className={styles.productsSection}>
             <h1 className={styles.categoryTitle}>{category.name}</h1>
-            <CategoryProducts 
-              products={products || []} 
-              currentCategory={category}  
+            <ProductDisplay 
+              category={category}
+              products={products || []}
             />
           </div>
         </ShopLayout>

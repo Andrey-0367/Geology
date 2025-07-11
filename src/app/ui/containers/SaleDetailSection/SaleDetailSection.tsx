@@ -7,20 +7,39 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import styles from "./SaleDetailSection.module.scss";
+import { API } from "@/api/apiConfig";
 
-
-export const SaleDetailSection = ({ imageUrls }: { imageUrls: string[] }) => {
-  const [isMounted, setIsMounted] = useState(false);
+export const SaleDetailSection = ({ itemId }: { itemId: number }) => {
+  const [images, setImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(API.saleItems.images(itemId));
+        if (!response.ok) throw new Error("Failed to fetch images");
+        
+        const data = await response.json();
+        
+        // Используем изображения напрямую из API без добавления базового URL
+        const imageUrls = data.results.map((img: any) => img.image);
+        
+        setImages(imageUrls);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!isMounted) return null;
+    fetchImages();
+  }, [itemId]);
+
+  if (loading) return <div className={styles.loading}>Загрузка изображений...</div>;
 
   return (
     <div className={styles.container}>
-      {imageUrls.length > 0 ? (
+      {images.length > 0 ? (
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -47,12 +66,16 @@ export const SaleDetailSection = ({ imageUrls }: { imageUrls: string[] }) => {
           modules={[EffectCoverflow, Pagination]}
           className={styles.swiperContainer}
         >
-          {imageUrls.map((src, index) => (
+          {images.map((src, index) => (
             <SwiperSlide key={index} className={styles.swiperSlide}>
               <img 
                 src={src} 
                 alt={`Slide ${index + 1}`} 
                 className={styles.image}
+                onError={(e) => {
+                  // Обработка ошибок загрузки изображений
+                  e.currentTarget.src = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/skoro.jpg`;
+                }}
               />
             </SwiperSlide>
           ))}

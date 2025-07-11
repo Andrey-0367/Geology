@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.1); // Полупрозрачная подложка
+  background: rgba(248, 144, 8, 0.1); 
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   display: flex;
@@ -14,12 +14,12 @@
 }
 
 .modalContent {
-  background: white;
+  background: rgb(219, 204, 157);
   border-radius: 12px;
   padding: 2rem;
   position: relative;
   max-width: 90%;
-  width: 500px;
+  width: auto;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   animation: modalSlideIn 0.3s ease-out;
 

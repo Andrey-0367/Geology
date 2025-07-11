@@ -1,0 +1,267 @@
+.cartButton {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff5722;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.cartContent {
+  width: 100%;
+  width: 100%;
+  max-height: 90vh;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+  }
+}
+
+.emptyCart {
+  text-align: center;
+  padding: 40px 0;
+  
+  p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #666;
+  }
+}
+
+.tableWrapper {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.cartTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  
+  th, td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+  }
+  
+  th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .imageHeader {
+    width: 70px;
+  }
+  
+  .nameHeader {
+    min-width: 180px;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .quantityHeader {
+    width: 100px;
+  }
+  
+  .priceHeader, .totalHeader {
+    width: 90px;
+  }
+  
+  .removeHeader {
+    width: 30px;
+  }
+}
+
+.cartItem {
+  &:hover {
+    background-color: #f8f9fa;
+  }
+}
+
+.imageCell {
+  .imagePlaceholder {
+    width: 50px;
+    height: 50px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 10px;
+  }
+  
+  .productImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+  }
+}
+
+.nameCell {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  
+  button {
+    width: 25px;
+    height: 25px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background: #e0e0e0;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  span {
+    margin: 0 8px;
+    min-width: 20px;
+    text-align: center;
+  }
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #ff5722;
+  font-size: 20px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    color: #e64a19;
+  }
+}
+
+.summary {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  
+  .summaryRow {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    padding: 8px 0;
+    border-top: 1px solid #eee;
+    
+    &:last-child {
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+  
+  .grandTotal {
+    color: #e91e63;
+    font-size: 18px;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.continueButton {
+  padding: 10px 20px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  
+  &:hover {
+    background: #e0e0e0;
+  }
+}
+
+.checkoutButton {
+  padding: 10px 20px;
+  background: #4caf50;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  text-transform: uppercase;
+  
+  &:hover {
+    background: #388e3c;
+  }
+}
+
+.checkoutWrapper {
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 10px;
+}

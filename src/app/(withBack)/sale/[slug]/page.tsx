@@ -6,25 +6,24 @@ import { getSale, getSaleDetails } from "@/api/sale";
 
 export async function generateStaticParams() {
   const sales = await getSale();
- return sales.map((sale) => ({ slug: sale.slug })); 
+  return sales.map((sale) => ({ slug: sale.slug }));
 }
 
 export default async function SaleDetailPage({
   params,
 }: {
-   params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>;
 }) {
   try {
-    const { slug: slug } = await params; 
+    const { slug: slug } = await params;
     const sale = await getSaleDetails(slug);
-   
+
     if (!sale) return notFound();
-  
 
     return (
       <div className={styles.container}>
         <Title tag={"h1"}>{sale.title || "Без названия"}</Title>
-        <SaleDetailSection imageUrls={sale.imageUrls || []} />
+        <SaleDetailSection itemId={Number(sale.id)} />
         <div className={styles.priceContainer}>
           <span className={styles.oldPrice}>
             {(sale.oldPrice ?? 0).toFixed(2)} ₽

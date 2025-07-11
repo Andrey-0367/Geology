@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef } from 'react';
 import styles from './CatalogSection.module.scss';
-import ProductList from '../ProductList/ProductList';
 import { CatalogSectionProps } from '@/types/catalog';
 import { useRouter } from 'next/navigation';
+import ProductDisplay from '../ProductDisplay/ProductDisplay'; // Импортируем новый компонент
 
 const CatalogSection: React.FC<CatalogSectionProps> = ({ 
   activeCategory, 
@@ -30,7 +30,7 @@ const CatalogSection: React.FC<CatalogSectionProps> = ({
       <div className={styles.container}>
         <div className={styles.contentColumn}>
           {activeCategory && (
-            <ProductList 
+            <ProductDisplay 
               category={activeCategory}
               products={products}
             />
